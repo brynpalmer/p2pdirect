@@ -85,9 +85,6 @@ public class MainActivity extends Activity implements PlaceholderFragment.PlaceH
     	unregisterReceiver(mReceiver);
     }
 
-
-
-
 	@Override
 	public void onDiscoverySelected() {
 		// TODO Auto-generated method stub
@@ -111,9 +108,13 @@ public class MainActivity extends Activity implements PlaceholderFragment.PlaceH
 			}
 		});
 	}
-
-
-
+	@Override
+	public void onBrowserSelected() {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onBrowserSelected()");
+		
+		Toast.makeText(getApplicationContext(), "Time to browse files!", Toast.LENGTH_SHORT).show();
+	}
 
 	@Override
 	public void onPeersAvailable(WifiP2pDeviceList peers) {

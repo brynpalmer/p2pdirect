@@ -22,6 +22,8 @@ public class PlaceholderFragment extends Fragment {
     
     public interface PlaceHolderListener {
 		public void onDiscoverySelected();
+
+		void onBrowserSelected();
 	}
     
     private PlaceHolderListener placeHolderListener;
@@ -37,7 +39,10 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        
         Button discoverPeerButton = (Button)rootView.findViewById(R.id.discovery_button);
+        Button fileBrowserButton = (Button)rootView.findViewById(R.id.file_browser_button);
+      
         discoverPeerButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -48,6 +53,18 @@ public class PlaceholderFragment extends Fragment {
 			
 			}
 		});
+        
+        fileBrowserButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.d(TAG, "I've been clicked!");
+				placeHolderListener.onBrowserSelected();
+			
+			}
+		});
+        
         return rootView;
     }
 }
