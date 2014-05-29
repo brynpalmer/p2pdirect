@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 //test
+//test 2
 public class MainActivity extends Activity implements PlaceholderFragment.PlaceHolderListener,PeerListListener {
 
 	private static final String	TAG	= "P2P Main activity";
