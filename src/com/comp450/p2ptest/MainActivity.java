@@ -1,9 +1,14 @@
 package com.comp450.p2ptest;
 
+import com.ipaulpro.afilechooser.utils.FileUtils;
+
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
@@ -17,8 +22,9 @@ import android.widget.Toast;
 //test
 public class MainActivity extends Activity implements PlaceholderFragment.PlaceHolderListener,PeerListListener {
 
-	private static final String		TAG							= "P2P Main activity";
+	private static final String	TAG	= "P2P Main activity";
 	
+	Uri uri;
 	WifiP2pManager mManager;
 	Channel mChannel;
 	BroadcastReceiver mReceiver;
@@ -32,9 +38,7 @@ public class MainActivity extends Activity implements PlaceholderFragment.PlaceH
         mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         mChannel = mManager.initialize(this, getMainLooper(), null);
         mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
-        
-       
-        
+
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
@@ -113,9 +117,36 @@ public class MainActivity extends Activity implements PlaceholderFragment.PlaceH
 		// TODO Auto-generated method stub
 		Log.d(TAG, "onBrowserSelected()");
 		
-		Toast.makeText(getApplicationContext(), "Time to browse files!", Toast.LENGTH_SHORT).show();
+        // Use the GET_CONTENT intent from the utility class
+        Intent target = FileUtils.createGetContentIntent();
+        // Create the chooser Intent
+        Intent intent = Intent.createChooser(
+                target, getString(R.string.choose_file));
+        try {
+            startActivityForResult(intent, 6383);
+        } catch (ActivityNotFoundException e) {
+        	Toast.makeText(getApplicationContext(), "Couldn't open file browser", Toast.LENGTH_SHORT).show();
+        }
 	}
-
+	 @Override
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 // If the file selection was successful
+		 if (resultCode == RESULT_OK) {
+			 if (data != null) {
+				 // Get the URI of the selected file
+				 uri = data.getData();
+				 Log.i(TAG, "Uri = " + uri.toString());
+				 try {
+					 // Get the file path from the URI
+					 final String path = FileUtils.getPath(this, uri);
+					 Toast.makeText(getApplicationContext(),
+							 "File Selected: " + path, Toast.LENGTH_LONG).show();
+				 } catch (Exception e) {
+					 Log.e("FileSelectorTestActivity", "File select error", e);
+				 }
+			 }
+		 }
+	 }
 	@Override
 	public void onPeersAvailable(WifiP2pDeviceList peers) {
 		// TODO Auto-generated method stub
