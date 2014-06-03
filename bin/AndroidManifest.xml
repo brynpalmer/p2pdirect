@@ -30,11 +30,11 @@
             </intent-filter>
         </activity>
     	<activity
-   			android:name="com.example.afilechooser.FileChooserActivity"
+   			android:name="com.ipaulpro.afilechooser.FileChooserActivity"
    			android:icon="@drawable/ic_launcher"
    			android:enabled="true"
    			android:exported="true"
-   			android:label="@string/choose_file" >
+   			android:label="@string/select_file" >
    			<intent-filter>
 	       		<action android:name="android.intent.action.GET_CONTENT" />
 		        <category android:name="android.intent.category.DEFAULT" />
