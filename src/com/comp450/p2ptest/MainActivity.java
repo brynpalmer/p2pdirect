@@ -1,7 +1,5 @@
 package com.comp450.p2ptest;
 
-import com.ipaulpro.afilechooser.utils.FileUtils;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -11,7 +9,6 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.os.Bundle;
@@ -19,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.ipaulpro.afilechooser.utils.FileUtils;
 //test
 //test 2
 public class MainActivity extends Activity implements PlaceholderFragment.PlaceHolderListener,PeerListListener {
@@ -140,8 +139,9 @@ public class MainActivity extends Activity implements PlaceholderFragment.PlaceH
 				 try {
 					 // Get the file path from the URI
 					 final String path = FileUtils.getPath(this, uri);
-					 Toast.makeText(getApplicationContext(),
-							 "File Selected: " + path, Toast.LENGTH_LONG).show();
+					 Intent intent = new Intent(MainActivity.this, ShowFileActiviy.class);
+					 intent.putExtra("file_path", path);
+					 startActivity(intent);
 				 } catch (Exception e) {
 					 Log.e("FileSelectorTestActivity", "File select error", e);
 				 }

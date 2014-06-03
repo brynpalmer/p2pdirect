@@ -35,19 +35,23 @@ public final class R {
         public static final int ic_provider=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0004;
+        public static final int action_settings=0x7f0a0005;
         public static final int container=0x7f0a0000;
         public static final int discovery_button=0x7f0a0002;
         public static final int file_browser_button=0x7f0a0003;
         public static final int hello_message=0x7f0a0001;
+        public static final int imageView1=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int file=0x7f030001;
-        public static final int fragment_main=0x7f030002;
+        public static final int activity_show_file_activiy=0x7f030001;
+        public static final int file=0x7f030002;
+        public static final int fragment_main=0x7f030003;
+        public static final int fragment_show_file_activiy=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f090000;
+        public static final int show_file_activiy=0x7f090001;
     }
     public static final class string {
         public static final int action_settings=0x7f070007;
@@ -57,9 +61,11 @@ public final class R {
         public static final int empty_directory=0x7f070000;
         public static final int error_selecting_file=0x7f070003;
         public static final int hello_message=0x7f070006;
+        public static final int hello_world=0x7f07000b;
         public static final int internal_storage=0x7f070004;
         public static final int select_file=0x7f070009;
         public static final int storage_removed=0x7f070001;
+        public static final int title_activity_show_file_activiy=0x7f07000a;
     }
     public static final class style {
         /** 

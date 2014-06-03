@@ -29,19 +29,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    	<activity
-   			android:name="com.ipaulpro.afilechooser.FileChooserActivity"
-   			android:icon="@drawable/ic_launcher"
-   			android:enabled="true"
-   			android:exported="true"
-   			android:label="@string/select_file" >
-   			<intent-filter>
-	       		<action android:name="android.intent.action.GET_CONTENT" />
-		        <category android:name="android.intent.category.DEFAULT" />
-       			<category android:name="android.intent.category.OPENABLE" />
-        		<data android:mimeType="*/*" />
-   			</intent-filter>
-		</activity>
+        <activity
+            android:name="com.ipaulpro.afilechooser.FileChooserActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/select_file" >
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.comp450.p2ptest.ShowFileActiviy"
+            android:label="@string/title_activity_show_file_activiy" >
+        </activity>
     </application>
 
 </manifest>
