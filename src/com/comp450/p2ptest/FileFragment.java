@@ -1,6 +1,7 @@
 package com.comp450.p2ptest;
 
 
+import android.R.drawable;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -42,16 +44,23 @@ public class FileFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		String type = "unknown";
 		String path = fileInfoActivity.getFilePath();
 		ImageView imageView = (ImageView)getView().findViewById(R.id.imageView1);
-		String type = FileFragment.getMimeType(path);
-		type = type.substring(0,type.indexOf("/"));		
+		String mime = FileFragment.getMimeType(path);
+		if(mime != null) type = mime.substring(0,mime.indexOf("/"));		
 		if(type.equals("image")) {
 			imageView.setVisibility(View.VISIBLE);
 			Bitmap myBitmap = BitmapFactory.decodeFile(path);
 			imageView.setImageBitmap(myBitmap);
-			Toast.makeText(getActivity().getApplicationContext(), "Swipe to share", Toast.LENGTH_SHORT).show();
+			
+		} else {
+			imageView.setVisibility(View.VISIBLE);
+			TextView textView = (TextView)getView().findViewById(R.id.fileName);
+			textView.setText("File Name: "+path);
+			imageView.setImageResource(R.drawable.ic_action_email);
 		}
+		Toast.makeText(getActivity().getApplicationContext(), "Swipe to share", Toast.LENGTH_SHORT).show();
 
 	}
 	

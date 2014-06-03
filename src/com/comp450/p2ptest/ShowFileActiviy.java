@@ -2,22 +2,20 @@ package com.comp450.p2ptest;
 
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+//Swipe reference
+//http://androidexample.com/Swipe_screen_left__right__top_bottom/index.php?view=article_discription&aid=95&aaid=118
+import android.view.MotionEvent;
 import android.widget.Toast;
-import android.os.Build;
 
 public class ShowFileActiviy extends Activity implements FileFragment.FileInfo {
 
 	private String path = "";
 	
-	
+	private GestureDetector mGestureDetector;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,26 @@ public class ShowFileActiviy extends Activity implements FileFragment.FileInfo {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new FileFragment()).commit();
 		}
-		path = getIntent().getStringExtra("file_path");		
+		path = getIntent().getStringExtra("file_path");
+		
+		//Swipe functionality from Adam Porter's coursera course
+		//https://github.com/aporter/coursera-android/tree/master/Examples/TouchGestureViewFlipperTest
+		mGestureDetector = new GestureDetector(this,
+				new GestureDetector.SimpleOnGestureListener() {
+					@Override
+					public boolean onFling(MotionEvent e1, MotionEvent e2,
+							float velocityX, float velocityY) {
+						if (Math.abs(velocityX) > 10.0f || Math.abs(velocityY) > 10.0f ) {
+							//Toast.makeText(getApplicationContext(), "Wow, did you swipe me your pervert ?", Toast.LENGTH_SHORT).show();							
+						}
+						return true;
+					}
+				});
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		return mGestureDetector.onTouchEvent(event);
 	}
 
 	@Override
